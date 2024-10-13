@@ -1,81 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download HexDraft</title>
+    <title>HexLLC - HexDraft</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f3f3f3, #ededed);
             margin: 0;
-            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(135deg, #1b1b1b, #2c2c2c);
+            color: #ffffff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            color: #333;
+            overflow: hidden;
         }
+
         .container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            animation: fadeIn 1s ease-in-out;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         h1 {
-            font-size: 2.2em;
-            color: #4a90e2;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            /* Reduced size */
+            color: #00adb5;
+            text-shadow: 0 0 30px rgba(0, 173, 183, 0.8);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
-        p {
-            font-size: 1.1em;
-            color: #666;
-            margin-bottom: 30px;
+
+        h2 {
+            color: #00adb5;
+            margin: 10px 0;
+            font-size: 2rem;
+            /* Reduced size */
+            text-transform: uppercase;
+            border-bottom: 3px solid #00adb5;
+            padding-bottom: 5px;
+            animation: slideIn 1s ease-in-out;
         }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-50%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         .btn-download {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #4a90e2;
+            background: linear-gradient(90deg, #00adb5, #393e46);
+            border: none;
             color: white;
-            font-size: 1.2em;
-            border-radius: 5px;
+            padding: 12px 24px;
+            /* Reduced padding */
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            /* Reduced size */
+            margin: 5px;
+            /* Reduced margin */
+            transition: background 0.3s ease, transform 0.3s ease;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+
         .btn-download:hover {
-            background-color: #357abd;
+            background: linear-gradient(90deg, #393e46, #00adb5);
+            transform: scale(1.05);
         }
+
+        .scroll-container {
+            height: 100px;
+            /* Reduced height */
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #00adb5;
+            border-radius: 10px;
+            margin: 10px 0;
+            /* Reduced margin */
+        }
+
+        .scrolling {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            animation: scroll 20s linear infinite;
+            /* Adjusted scroll speed */
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        .item {
+            padding: 10px;
+            /* Reduced padding */
+            font-size: 1rem;
+            /* Reduced size */
+            color: #f8f8f8;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .query {
+            margin: 20px 0;
+            padding: 15px;
+            /* Reduced padding */
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .query-input {
+            width: 100%;
+            padding: 10px;
+            /* Reduced padding */
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            /* Reduced size */
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            resize: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
         .contact {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #555;
+            margin-top: 15px;
+            /* Reduced margin */
+            color: #00adb5;
+            font-size: 1rem;
+            /* Reduced size */
         }
-        .contact a {
-            color: #4a90e2;
-            text-decoration: none;
-        }
-        .contact a:hover {
-            text-decoration: underline;
-        }
+
         footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #999;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            /* Reduced size */
+            color: #e0e0e0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn-download {
+                font-size: 1.1rem;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Download HexDraft</h1>
-        <p>Get the latest version of HexDraft by clicking the button below:</p>
-        <a href="/download/Hex-Draft.rar" class="btn-download">Download HexDraft-1</a>
-       <p> <a href="/download/Hex-Draft-2.rar" class="btn-download">Download HexDraft-2</a></p>
-        <div class="contact">
-            <p>For any questions, contact the admin at: <a href="mailto:hexmanual@gmail.com">hexmanual@gmail.com</a></p>
+        <h1>Welcome to Hex Draft!</h1>
+        <p><span style="font-size: 22px;"><span style='font-family: "Arial Black", Gadget, sans-serif; color: rgb(84, 172, 210);'><sub>Hex Draft makes email marketing effortless. It ensures high inbox placement and offers an intuitive design for easy use. Create effective campaigns and reach your audience without hassle!</sub></span></span></p>
+        <p><br></p>
+        <div><a href="https://download1638.mediafire.com/9nd4ruptb0bgR6lo42x3-ve5rH8C_gNuUZyd2CRHYXOEI88qh3HCTLrW3JkCQ1QQYnlIBxnn1yC7SkjIAplWvFMfHnONDrTUvQqIhN0Qxq70PoVbddD2TqKz6N7s9T7mcxNl_kS15j5ag6_RSyL9BhWC29oWGOIKcf0lRUEYneDCPSn9/jyxehe4j9l8iemw/Hex-Draft.zip" class="btn-download">Download HexDraft-1</a><br><br><br><br><a href="https://download854.mediafire.com/az3dneu2b9ogyLZGPl_7OJ9S0cWhvqwlps2IMNY7v2ZzqZXUqNymJv-LbOFO-OmTdxLrn1aR3UpOW17LfnXEGpJxyLn0m5_cEl12uqc-mUIiuf4MVXYe8aWwJDmwFpDI2jpyI8UcndtQNEbx2MXPQHbyRFRajeb3A6sZA_MP33CQ-5H1/mzrnwvjvlo53jj6/Hex-Draft-2.zip" class="btn-download">Download HexDraft-2</a></div>
+        <p><br></p>
+        <p><br></p>
+        <h2>User Reviews</h2>
+        <div class="scroll-container">
+            <div class="scrolling">
+                <div class="item">&quot;HexDraft is a game changer! It&apos;s transformed my workflow!&quot;</div>
+                <div class="item">&quot;Incredible features that save time and effort!&quot;</div>
+                <div class="item">&quot;HexDraft simplifies my email campaigns remarkably!&quot;</div>
+                <div class="item">&quot;Impressive results in my marketing strategies!&quot;</div>
+                <div class="item">&quot;The user interface is sleek and user-friendly!&quot;</div>
+                <div class="item">&quot;I can&apos;t believe how easy it is to manage emails now!&quot;</div>
+                <div class="item">&quot;A powerful tool that has exceeded my expectations!&quot;</div>
+                <div class="item">&quot;The analytics provided are incredibly insightful!&quot;</div>
+                <div class="item">&quot;I love using HexDraft for all my marketing needs!&quot;</div>
+                <div class="item">&quot;Fantastic customer support, always ready to help!&quot;</div>
+                <div class="item">&quot;HexDraft is the best investment for my business!&quot;</div>
+                <div class="item">&quot;My campaigns are now more successful than ever!&quot;</div>
+                <div class="item">&quot;Great integration with other marketing tools!&quot;</div>
+                <div class="item">&quot;A must-have tool for any serious marketer!&quot;</div>
+                <div class="item">&quot;HexDraft has become essential for my workflow!&quot;</div>
+                <div class="item">&quot;I recommend it to everyone I know!&quot;</div>
+                <div class="item">&quot;The features are innovative and incredibly useful!&quot;</div>
+                <div class="item">&quot;I appreciate how intuitive the platform is!&quot;</div>
+                <div class="item">&quot;I can&apos;t imagine running my campaigns without HexDraft!&quot;</div>
+                <div class="item">&quot;This tool has changed the way I do marketing!&quot;</div>
+                <div class="item">&quot;I love the time-saving features in HexDraft!&quot;</div>
+            </div>
         </div>
-        <footer>&copy; 2024 HexLLC - All rights reserved.</footer>
+        <h2>Latest News</h2>
+        <div class="scroll-container">
+            <div class="scrolling">
+                <div class="item">&quot;HexDraft partners with top email service providers!&quot;</div>
+                <div class="item">&quot;Unlock your marketing potential with HexDraft!&quot;</div>
+                <div class="item">&quot;Stay tuned for exciting upcoming features!&quot;</div>
+                <div class="item">&quot;HexDraft featured in leading marketing blogs!&quot;</div>
+                <div class="item">&quot;Join our community for exclusive tips and tricks!&quot;</div>
+                <div class="item">&quot;Check out our latest success stories!&quot;</div>
+                <div class="item">&quot;HexDraft launches new customer support portal!&quot;</div>
+                <div class="item">&quot;Introducing integrations with popular CRM tools!&quot;</div>
+            </div>
+        </div>
+        <div class="query">
+            <h2>Have a Query?</h2>
+            <form action="mailto:nullbyte0031@gmail.com" method="POST" enctype="text/plain"><textarea name="query" class="query-input" rows="4" placeholder="Type your query here..." required=""></textarea><br><input type="submit" value="Send" class="btn-download"></form>
+        </div>
+        <div class="contact">For support, contact: <a href="mailto:nullbyte0031@gmail.com">nullbyte0031@gmail.com</a></div>
+        <footer>
+            <p>&copy; 2024 HexLLC. All rights reserved.</p>
+        </footer>
     </div>
 </body>
+
 </html>
