@@ -1,237 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HexDraft - Download</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>HexDraft - Email Marketing Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #1a1a1a, #333);
-            color: #fff;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e50914;
+            --primary-hover: #f40612;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --gray: #b3b3b3;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            flex-direction: column;
-            height: 100vh;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .main-content {
+            padding: 6rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            overflow: hidden;
+            padding: 2rem;
         }
 
-        .container {
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .container:hover {
-            transform: scale(1.02);
-            /* Slight hover effect */
+        .hero-content {
+            max-width: 800px;
         }
 
         h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            color: #e50914;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
             text-transform: uppercase;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
             letter-spacing: 2px;
+            line-height: 1.2;
         }
 
         h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 400;
-            color: #ddd;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--light);
+            font-weight: 500;
         }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            color: #b3b3b3;
+        .description {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .btn-download {
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .btn {
             display: inline-block;
-            padding: 15px 30px;
-            background-color: #e50914;
-            color: #fff;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--light);
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
             border: 2px solid transparent;
-            /* Border for hover effect */
+            min-width: 200px;
         }
 
-        .btn-download:hover {
-            background-color: #f40612;
-            transform: scale(1.05);
-            border-color: #fff;
-            /* White border on hover */
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+        }
+
+        .reviews-section {
+            padding: 4rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 4rem 0;
+            border-radius: 16px;
+        }
+
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .review-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 4rem;
         }
 
         .contact {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #ddd;
+            margin-bottom: 1rem;
         }
 
         .contact a {
-            color: #e50914;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: bold;
-            transition: text-decoration 0.3s;
+            font-weight: 500;
         }
 
         .contact a:hover {
             text-decoration: underline;
         }
 
-        footer {
-            margin-top: 20px;
-            font-size: 0.8em;
-            color: #999;
-        }
-
-        /* Review Section */
-        .reviews-container {
-            height: 120px;
-            /* Fixed height for review area */
-            overflow: hidden;
-            position: relative;
-            margin-top: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .reviews {
-            display: flex;
-            flex-direction: column;
-            animation: scroll 20s linear infinite;
-            /* Continuous scrolling */
-        }
-
-        .review {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 5px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            opacity: 1;
-            /* Start visible */
-            min-height: 50px;
-            /* Minimum height for each review */
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateY(0);
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
             }
 
-            10% {
-                transform: translateY(0);
+            .hero {
+                padding: 1rem;
             }
 
-            20% {
-                transform: translateY(-25%);
-                /* Adjust based on number of reviews */
-            }
-
-            30% {
-                transform: translateY(-25%);
-            }
-
-            40% {
-                transform: translateY(-50%);
-                /* Adjust based on number of reviews */
-            }
-
-            50% {
-                transform: translateY(-50%);
-            }
-
-            60% {
-                transform: translateY(-75%);
-                /* Adjust based on number of reviews */
-            }
-
-            70% {
-                transform: translateY(-75%);
-            }
-
-            80% {
-                transform: translateY(-100%);
-                /* Adjust based on number of reviews */
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5em;
-                /* Smaller heading for mobile */
-            }
-
-            h2 {
-                font-size: 1.4em;
-                /* Smaller subheading for mobile */
-            }
-
-            .btn-download {
-                font-size: 1em;
-                padding: 12px 20px;
-                /* Smaller button */
+            .reviews-section {
+                margin: 2rem 0;
+                padding: 2rem 0;
             }
 
             .reviews-container {
-                height: 100px;
-                /* Adjusted height for smaller screens */
+                padding: 0 1rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>HexDraft</h1>
-        <h2>Your Email Marketing Solution</h2>
-        <p>Elevate your email marketing game with HexDraft. Effortless design, high inbox placement, and intuitive tools to reach your audience effectively.</p><p><a href="https://download1638.mediafire.com/9nd4ruptb0bgR6lo42x3-ve5rH8C_gNuUZyd2CRHYXOEI88qh3HCTLrW3JkCQ1QQYnlIBxnn1yC7SkjIAplWvFMfHnONDrTUvQqIhN0Qxq70PoVbddD2TqKz6N7s9T7mcxNl_kS15j5ag6_RSyL9BhWC29oWGOIKcf0lRUEYneDCPSn9/jyxehe4j9l8iemw/Hex-Draft.zip" class="btn-download">Download HexDraft-1</a></p><p> <a href="https://download854.mediafire.com/az3dneu2b9ogyLZGPl_7OJ9S0cWhvqwlps2IMNY7v2ZzqZXUqNymJv-LbOFO-OmTdxLrn1aR3UpOW17LfnXEGpJxyLn0m5_cEl12uqc-mUIiuf4MVXYe8aWwJDmwFpDI2jpyI8UcndtQNEbx2MXPQHbyRFRajeb3A6sZA_MP33CQ-5H1/mzrnwvjvlo53jj6/Hex-Draft-2.zip" class="btn-download">Download HexDraft-2</a></p>
-        <p><a href="https://download850.mediafire.com/evbbssp6m4sgMSUzkYhI6IfUCrH30catEOas1-CfKinEt10Wf9fHCtxMT97nIxhBBB-aJCDNiFM0Pz4u_3SKqQ7t-z6oTx7uPdQUgMlE__GnChDvQbl2krWLXt2KRBLkCVniP3cCLECLh381aVID_uqBAp-b5iPac0UOd0injhRq-A/3n51dpbj9ji7k9x/HexSmtp.rar" class="btn-download">Download HexSmtp</a>
-        <div class="reviews-container"></p>
-            <div class="reviews">
-                <div class="review">&quot;HexDraft has transformed our email marketing strategy. Highly recommended!&quot;</div>
-                <div class="review">&quot;An intuitive tool that saves time and enhances our campaigns significantly.&quot;</div>
-                <div class="review">&quot;I love the user-friendly interface! It&apos;s easy to create beautiful emails.&quot;</div>
-                <div class="review">&quot;Great customer support and powerful features. Worth every penny!&quot;</div>
-                <div class="review">&quot;The analytics tools provided are exceptional, allowing us to track our success.&quot;</div>
-                <div class="review">&quot;HexDraft has made our communication much more effective and engaging!&quot;</div>
-                <div class="review">&quot;This tool is a game changer for our marketing efforts. Highly satisfied!&quot;</div>
-                <div class="review">&quot;Easy to use, and the results speak for themselves. My go-to email tool!&quot;</div>
-            </div>
-        </div>
-        <div class="contact">
-            <p>For inquiries, contact: <a href="mailto:nullbyte0031@gmail.com">Click here</a></p>
-        </div>
-        <footer>&copy; 2024 Hex LLC - All rights reserved.</footer>
-    </div>
-</body>
+    <nav class="navbar">
+        <a href="#" class="logo">HexDraft</a>
+    </nav>
 
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>HexDraft</h1>
+                <h2>Your Email Marketing Solution</h2>
+                <p class="description">Elevate your email marketing game with HexDraft. Effortless design, high inbox placement, and intuitive tools to reach your audience effectively.</p>
+                
+                <div class="download-section">
+                    <a href="https://download1638.mediafire.com/9nd4ruptb0bgR6lo42x3-ve5rH8C_gNuUZyd2CRHYXOEI88qh3HCTLrW3JkCQ1QQYnlIBxnn1yC7SkjIAplWvFMfHnONDrTUvQqIhN0Qxq70PoVbddD2TqKz6N7s9T7mcxNl_kS15j5ag6_RSyL9BhWC29oWGOIKcf0lRUEYneDCPSn9/jyxehe4j9l8iemw/Hex-Draft.zip" class="btn">Download HexDraft-1</a>
+                    <a href="https://download854.mediafire.com/az3dneu2b9ogyLZGPl_7OJ9S0cWhvqwlps2IMNY7v2ZzqZXUqNymJv-LbOFO-OmTdxLrn1aR3UpOW17LfnXEGpJxyLn0m5_cEl12uqc-mUIiuf4MVXYe8aWwJDmwFpDI2jpyI8UcndtQNEbx2MXPQHbyRFRajeb3A6sZA_MP33CQ-5H1/mzrnwvjvlo53jj6/Hex-Draft-2.zip" class="btn">Download HexDraft-2</a>
+                    <a href="https://download850.mediafire.com/evbbssp6m4sgMSUzkYhI6IfUCrH30catEOas1-CfKinEt10Wf9fHCtxMT97nIxhBBB-aJCDNiFM0Pz4u_3SKqQ7t-z6oTx7uPdQUgMlE__GnChDvQbl2krWLXt2KRBLkCVniP3cCLECLh381aVID_uqBAp-b5iPac0UOd0injhRq-A/3n51dpbj9ji7k9x/HexSmtp.rar" class="btn">Download HexSmtp</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews-section">
+            <div class="reviews-container">
+                <div class="review-card">"HexDraft has transformed our email marketing strategy. Highly recommended!"</div>
+                <div class="review-card">"An intuitive tool that saves time and enhances our campaigns significantly."</div>
+                <div class="review-card">"I love the user-friendly interface! It's easy to create beautiful emails."</div>
+                <div class="review-card">"Great customer support and powerful features. Worth every penny!"</div>
+                <div class="review-card">"The analytics tools provided are exceptional, allowing us to track our success."</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="contact">
+            <p>For inquiries, contact: <a href="mailto:nullbyte0031@gmail.com">nullbyte0031@gmail.com</a></p>
+        </div>
+        <p>&copy; 2024 Hex LLC - All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll animation for reviews
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.review-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // GSAP animations
+        gsap.from(".hero-content", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: "power3.out"
+        });
+
+        gsap.from(".btn", {
+            duration: 0.8,
+            scale: 0.9,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "back.out"
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+                return;
+            }
+
+            if (currentScroll > lastScroll) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
 </html>
